@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"github.com/DomBlack/advent-of-code-2018/lib"
 	"log"
-	"regexp"
-	"strconv"
 )
 
 func main() {
@@ -62,14 +60,13 @@ func day3(pieces []Piece) (int, int) {
 
 			// Mark any overlapped pieces
 			for _, overlappedID := range grid[p.x][p.y] {
-				piecesOverlapped[overlappedID - 1] = true
-				piecesOverlapped[piece.id - 1] = true
+				piecesOverlapped[overlappedID-1] = true
+				piecesOverlapped[piece.id-1] = true
 			}
 
 			grid[p.x][p.y] = append(grid[p.x][p.y], piece.id)
 		}
 	}
-
 
 	// Find the piece which was not overlapped
 	nonOverlappedPiece := 0
@@ -123,29 +120,20 @@ func (p *Piece) Positions() []Point {
 }
 
 // Parse a piece
-func NewPiece(input string) Piece {
-	r, err := regexp.Compile("^#(\\d+) @ (\\d+),(\\d+): (\\d+)x(\\d+)$")
+func NewPiece(input string) (res Piece) {
+	num, err := fmt.Sscanf(
+		input,
+		"#%d @ %d,%d: %dx%d",
+		&res.id, &res.position.x, &res.position.y, &res.size.x, &res.size.y,
+	)
+
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	parts := r.FindStringSubmatch(input)
-	if parts == nil {
-		log.Fatal("Unable to parse: ", input)
+	if num != 5 {
+		log.Fatalf("Expected file to have 5 inputs, got %d", num)
 	}
 
-	return Piece{
-		toInt(parts[1]),
-		Point{toInt(parts[2]), toInt(parts[3])},
-		Point{toInt(parts[4]), toInt(parts[5])},
-	}
-}
-
-func toInt(what string) int {
-	num, err := strconv.Atoi(what)
-	if err != nil {
-		log.Fatal("Unable to convert to int: ", what)
-	}
-
-	return num
+	return
 }
