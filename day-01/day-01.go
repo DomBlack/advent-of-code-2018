@@ -1,8 +1,8 @@
 package main
 
 import (
-	"../lib"
 	"fmt"
+	"github.com/DomBlack/advent-of-code-2018/lib"
 )
 
 func main() {
