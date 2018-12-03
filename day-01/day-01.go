@@ -1,16 +1,12 @@
 package main
 
 import (
-	"bufio"
+	"../lib"
 	"fmt"
-	"io"
-	"log"
-	"os"
-	"strconv"
 )
 
 func main() {
-	input := readAsInts("day-01/input.txt")
+	input := lib.InputAsIntegers("day-01")
 
 	fmt.Println("Part 1:", part1(input))
 	fmt.Println("Part 2:", part2(input))
@@ -51,32 +47,3 @@ func part2(input []int) int {
 	}
 }
 
-// Reads the given input file as a slice of integers
-func readAsInts(fileName string) []int {
-	file, err := os.Open(fileName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer Close(file)
-
-	var input []int
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		i, err := strconv.Atoi(scanner.Text())
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		input = append(input, i)
-	}
-
-	return input
-}
-
-func Close(c io.Closer) {
-	err := c.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
-}
