@@ -3,9 +3,11 @@ package lib
 import (
 	"bufio"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
 
 // Reads the given input file as a slice of integers
@@ -46,6 +48,16 @@ func InputAsStrings(folder string) []string {
 	}
 
 	return input
+}
+
+// Read the input file as a single string
+func InputAsString(folder string) string {
+	file, err := ioutil.ReadFile(folder + "/input.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return strings.TrimSpace(string(file))
 }
 
 // Closes a closer handling the error
