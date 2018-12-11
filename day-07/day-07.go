@@ -69,7 +69,7 @@ func sortToVisitSlice(toVisit []*graph.Node) {
 func part1(entry []*graph.Node) string {
 	order := ""
 	toVisit := entry
-	visited := make(map[string] struct{})
+	visited := make(map[string]struct{})
 
 	sortToVisitSlice(toVisit)
 
@@ -107,7 +107,7 @@ func part1(entry []*graph.Node) string {
 func part2(entry []*graph.Node, baseTime int, numWorkers int) (string, int) {
 	order := ""
 	toVisit := entry
-	visited := make(map[string] struct{})
+	visited := make(map[string]struct{})
 
 	canVisit := func(node *graph.Node) bool {
 		for _, edge := range node.Inbound {
@@ -123,13 +123,13 @@ func part2(entry []*graph.Node, baseTime int, numWorkers int) (string, int) {
 
 	type worker struct {
 		busyUntil int
-		node *graph.Node
+		node      *graph.Node
 	}
 
 	// A map of worker ID to when it's not busy
 	workers := make(map[int]*worker)
 	for i := 0; i < numWorkers; i++ {
-		workers[i] = &worker {}
+		workers[i] = &worker{}
 	}
 
 	// Is a worker busy right now?
@@ -186,4 +186,3 @@ func part2(entry []*graph.Node, baseTime int, numWorkers int) (string, int) {
 
 	return order, clock - 1
 }
-
