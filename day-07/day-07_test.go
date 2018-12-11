@@ -20,3 +20,17 @@ func Test_part1(t *testing.T) {
 		t.Errorf("part1() = %v, want %v", got, want)
 	}
 }
+
+func Test_part2(t *testing.T) {
+	wantWord := "CABFDE"
+	wantClock := 15
+	gotWord, gotClock := part2(GraphFromStrings(exampleInput), 0, 2)
+
+	if gotClock != wantClock {
+		t.Errorf("part2() = %v, want %v", gotClock, wantClock)
+	}
+
+	if gotWord != wantWord {
+		t.Errorf("part2() = %v, want %v", gotWord, wantWord)
+	}
+}
