@@ -1,4 +1,4 @@
-package particle
+package vectors
 
 import "github.com/DomBlack/advent-of-code-2018/lib"
 
@@ -25,4 +25,8 @@ func (p1 Vec2) Min(p2 Vec2) Vec2 {
 // Adds two vectors together
 func (p1 *Vec2) Add(p2 Vec2) Vec2 {
 	return Vec2 { p1.X + p2.X, p1.Y + p2.Y }
+}
+
+func NewVec2(x, y int) Vec2 {
+	return Vec2 { x, y }
 }

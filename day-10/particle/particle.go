@@ -2,12 +2,13 @@ package particle
 
 import (
 	"fmt"
+	"github.com/DomBlack/advent-of-code-2018/lib/vectors"
 	"log"
 	"strings"
 )
 
 type Particle struct {
-	Position, Velocity Vec2
+	Position, Velocity vectors.Vec2
 }
 
 // Step time
@@ -18,8 +19,8 @@ func (particle *Particle) Step() {
 // Creates a new line from a string formatted like this:
 // "position=<-6, 10> velocity=< 2, -2>"
 func New(line string) (res Particle) {
-	res.Position = Vec2{}
-	res.Velocity = Vec2{}
+	res.Position = vectors.Vec2{}
+	res.Velocity = vectors.Vec2{}
 
 	// Parse the string (removing whitespace first due to variable lengths)
 	num, err := fmt.Sscanf(
