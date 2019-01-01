@@ -1,6 +1,9 @@
 package vectors
 
-import "github.com/DomBlack/advent-of-code-2018/lib"
+import (
+	"fmt"
+	"github.com/DomBlack/advent-of-code-2018/lib"
+)
 
 type Vec2 struct {
 	X, Y int
@@ -25,6 +28,10 @@ func (p1 Vec2) Min(p2 Vec2) Vec2 {
 // Adds two vectors together
 func (p1 *Vec2) Add(p2 Vec2) Vec2 {
 	return Vec2 { p1.X + p2.X, p1.Y + p2.Y }
+}
+
+func (p Vec2) String() string {
+	return fmt.Sprintf("%v,%v", p.X, p.Y)
 }
 
 func NewVec2(x, y int) Vec2 {
