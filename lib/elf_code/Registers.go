@@ -9,8 +9,8 @@ import (
 type Registers []int
 
 // Create the registers
-func NewRegisters() (res Registers) {
-	res = make(Registers, 4)
+func NewRegisters(numRegisters int) (res Registers) {
+	res = make(Registers, numRegisters)
 	return
 }
 

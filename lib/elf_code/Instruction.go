@@ -14,8 +14,27 @@ type Instruction struct {
 	C      int    // The output register
 }
 
-// Creates an instruction from a given string
+// Creates a new instruction from a given string using the assembly op code name
 func NewInstruction(code string) (res Instruction, err error) {
+	var opCodeStr string
+	num, err := fmt.Sscanf(code, "%s %d %d %d", &opCodeStr, &res.A, &res.B, &res.C)
+
+	if err != nil {
+		return
+	}
+
+	if num != 4 {
+		err = errors.New("instruction had an invalid number of ints")
+		return
+	}
+
+	res.OpCode, err = ParseOpCode(opCodeStr)
+
+	return
+}
+
+// Creates an instruction from a given string from a number OpCode rather than name
+func NewInstructionFromNumber(code string) (res Instruction, err error) {
 	num, err := fmt.Sscanf(code, "%d %d %d %d", &res.OpCode, &res.A, &res.B, &res.C)
 
 	if err != nil {

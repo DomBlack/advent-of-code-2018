@@ -1,6 +1,10 @@
 package elf_code
 
-import "strconv"
+import (
+	"errors"
+	"strconv"
+	"strings"
+)
 
 type OpCode int
 
@@ -61,6 +65,47 @@ func (o OpCode) String() string {
 		return "eqrr"
 	default:
 		return "Unknown OpCode: " + strconv.Itoa(int(o))
+	}
+}
+
+// Parse an op code from string
+func ParseOpCode(str string) (opCode OpCode, err error) {
+	switch strings.ToLower(str) {
+	case "addr":
+		return AddR, nil
+	case "addi":
+		return AddI, nil
+	case "mulr":
+		return MulR, nil
+	case "muli":
+		return MulI, nil
+	case "banr":
+		return BanR, nil
+	case "bani":
+		return BanI, nil
+	case "borr":
+		return BorR, nil
+	case "bori":
+		return BorI, nil
+	case "setr":
+		return SetR, nil
+	case "seti":
+		return SetI, nil
+	case "gtir":
+		return GtIR, nil
+	case "gtri":
+		return GtRI, nil
+	case "gtrr":
+		return GtRR, nil
+	case "eqir":
+		return EqIR, nil
+	case "eqri":
+		return EqRI, nil
+	case "eqrr":
+		return EqRR, nil
+	default:
+		err = errors.New("unknown op code: " + str)
+		return
 	}
 }
 

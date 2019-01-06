@@ -1,0 +1,36 @@
+addi 3 16 3   | $IP += 16
+seti 1 7 1    | $R[1] = 1
+seti 1 7 5    | $R[5] = 1
+mulr 1 5 4    | $R[4] = $R[1] * $R[5]
+eqrr 4 2 4    | $R[4] = ($R[4] == $R[2]) ? 1 : 0
+addr 4 3 3    | $IP += $R[4]
+addi 3 1 3    | $IP += 1
+addr 1 0 0    | $R[0] += $R[1]
+addi 5 1 5    | $R[5] += 1
+gtrr 5 2 4    | $R[4] = ($R[5] > $R[2]) ? 1 : 0
+addr 3 4 3    | $IP += R[4]
+seti 2 2 3    | $IP = 2
+addi 1 1 1    | $R[1]++
+gtrr 1 2 4    | $R[4] = ($R[1] > $R[2]) ? 1 : 0
+addr 4 3 3    | $IP += $R[4]
+seti 1 5 3    | $IP = 1
+mulr 3 3 3    | $IP *= $IP
+addi 2 2 2    | $R[2] += 2
+mulr 2 2 2    | $R[2] *= $R[2]
+mulr 3 2 2    | $R[2] *= $IP
+muli 2 11 2   | $R[2] *= 11
+addi 4 2 4    | $R[4] += 2
+mulr 4 3 4    | $R[4] *= $IP
+addi 4 2 4    | $R[4] += 2
+addr 2 4 2    | $R[2] += $R[4]
+addr 3 0 3    | $IP += $R[0]
+seti 0 8 3    | $IP = 0
+setr 3 8 4    | $R[4] = $IP
+mulr 4 3 4    | $R[4] *= $IP
+addr 3 4 4    | $R[4] += $IP
+mulr 3 4 4    | $R[4] *= $IP
+muli 4 14 4   | $R[4] *= 14
+mulr 4 3 4    | $R[4] *= $IP
+addr 2 4 2    | $R[2] += $R[4]
+seti 0 7 0    | $R[0] = 0
+seti 0 9 3    | $IP = 0

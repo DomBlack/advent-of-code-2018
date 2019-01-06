@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/DomBlack/advent-of-code-2018/day-16/elf_code"
+	"github.com/DomBlack/advent-of-code-2018/lib/elf_code"
 	"github.com/DomBlack/advent-of-code-2018/lib"
 	"log"
 	"reflect"
@@ -71,7 +71,7 @@ func part2(samples []Sample, program elf_code.Program) int {
 	}
 
 	// Create a CPU and run it with the given program
-	cpu := elf_code.NewCPU(program)
+	cpu := elf_code.NewCPU(program, 4, 5)
 	err := cpu.Execute()
 
 	if err != nil {
@@ -95,7 +95,7 @@ func parseInput(input []string) (samples []Sample, program elf_code.Program) {
 			)
 			i += 3
 		} else if line != "" {
-			instruction, err := elf_code.NewInstruction(line)
+			instruction, err := elf_code.NewInstructionFromNumber(line)
 			if err != nil {
 				log.Fatal("Unable to parse instruction " + line)
 			}
@@ -115,15 +115,15 @@ type Sample struct {
 
 // Parse the sample
 func parseSample(before, instruction, after string) (res Sample) {
-	res.before = elf_code.NewRegisters()
-	res.after = elf_code.NewRegisters()
+	res.before = elf_code.NewRegisters(4)
+	res.after = elf_code.NewRegisters(4)
 
 	num, err := fmt.Sscanf(before, "Before: [%d, %d, %d, %d]", &res.before[0], &res.before[1], &res.before[2], &res.before[3])
 	if num != 4 && err != nil {
 		log.Fatal("Unable to parse: " + before)
 	}
 
-	res.instruction, err = elf_code.NewInstruction(instruction)
+	res.instruction, err = elf_code.NewInstructionFromNumber(instruction)
 	if err != nil {
 		log.Fatal("Unable to parse instruction: " + instruction)
 	}
