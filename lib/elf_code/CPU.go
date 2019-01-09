@@ -20,7 +20,7 @@ type CPU struct {
 // Creates a new CPU and loads it with the given program
 func NewCPU(program Program, ipRegister int, numRegisters int) (res *CPU) {
 	if ipRegister < 0 || ipRegister >= numRegisters {
-		panic("The IP Register must be within range of the registers!")
+		panic("The IP Register must be within range of the Registers!")
 	}
 
 	return &CPU{

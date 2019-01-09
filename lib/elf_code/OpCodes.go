@@ -68,6 +68,10 @@ func (o OpCode) String() string {
 	}
 }
 
+func (o OpCode) isComparator() bool {
+	return o >= GtIR && o <= EqRR
+}
+
 // Parse an op code from string
 func ParseOpCode(str string) (opCode OpCode, err error) {
 	switch strings.ToLower(str) {
@@ -129,7 +133,41 @@ func OpCodesWithout(filter []OpCode) []OpCode {
 	return result
 }
 
-// The function which executes the given op code, with the A, B inputs and the current registers. Returns the value to
+type InputIsImmediate struct {
+	A, B bool
+}
+
+// Lookup table for if op codes are immediate values or not
+var OpCodeInputType = map[OpCode]InputIsImmediate{
+	AddR: { false, false },
+	AddI: { false, true },
+	MulR: { false, false },
+	MulI: { false, true },
+	BanR: { false, false },
+	BanI: { false, true },
+	BorR: { false, false },
+	BorI: { false, true },
+	SetR: { false, true },
+	SetI: { true, true },
+	GtIR: { true, false },
+	GtRI: { false, true },
+	GtRR: { false, false },
+	EqIR: { true, false },
+	EqRI: { false, true },
+	EqRR: { false, false },
+}
+
+// Lookup table for if input B register is constant, what op we can swap it out for
+var OpCodeImmedateVersion = map[OpCode]OpCode {
+	AddR: AddI,
+	MulR: MulI,
+	BanR: BanI,
+	BorR: BorI,
+	GtRR: GtRI,
+	EqRR: EqRI,
+}
+
+// The function which executes the given op code, with the A, B inputs and the current Registers. Returns the value to
 // put in output C and any error with the op code
 type OpFunc = func(a int, b int, registers Registers) (value int, err error)
 

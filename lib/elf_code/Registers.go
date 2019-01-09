@@ -8,7 +8,7 @@ import (
 
 type Registers []int
 
-// Create the registers
+// Create the Registers
 func NewRegisters(numRegisters int) (res Registers) {
 	res = make(Registers, numRegisters)
 	return
@@ -23,7 +23,7 @@ func (r Registers) Get(a int) (value int, err error) {
 	return r[a], nil
 }
 
-// Gets the value of the two given registers `a` and `b`
+// Gets the value of the two given Registers `a` and `b`
 func (r Registers) GetTwo(a, b int) (valueA int, valueB int, err error) {
 	if a >= len(r) || a < 0 {
 		return 0, 0, errors.New("register a out of bounds")
@@ -46,14 +46,14 @@ func (r Registers) Set(a int, value int) (err error) {
 	return
 }
 
-// Creates a copy of the registers
+// Creates a copy of the Registers
 func (r Registers) Copy() (res Registers) {
 	res = make(Registers, len(r))
 	copy(res, r)
 	return
 }
 
-// Writes the registers out
+// Writes the Registers out
 func (r Registers) String() string {
 	var str strings.Builder
 
