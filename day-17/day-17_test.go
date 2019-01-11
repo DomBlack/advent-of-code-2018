@@ -165,7 +165,7 @@ func TestReservoir_PourUntilRestingCreated(t *testing.T) {
 
 func TestReservoir_RunSimulation(t *testing.T) {
 	r := NewReservoir(exampleInput)
-	got := r.RunSimulation()
+	got, _ := r.RunSimulation()
 	const want = 57
 
 	if got != want {
